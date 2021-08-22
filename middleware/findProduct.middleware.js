@@ -11,7 +11,7 @@ async function findProduct(req,res,next,productId){
         console.log(foundProduct)
         next()
     }catch(err){
-        res.status(400).json({success:false, errorMessage:`error thrown with message: ${err.message}`})
+        res.status(400).json({success:false, errorMessage:`product not found with error message: ${err.message}`})
     }
 }
 

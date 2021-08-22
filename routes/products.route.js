@@ -48,7 +48,16 @@ router.route("/:productId")
         product = await product.save()
         res.status(201).json({success:true,updatedProduct:product})
     }catch(err){
-        res.status(500).json({success:false,message:`error with message: ${err.message}`})
+        res.status(500).json({success:false,message:` error message: ${err.message}`})
+    }
+})
+.delete(async(req,res) => {
+    try{
+        let {product} = req
+        await product.delete()
+        res.status(201).json({success:true,message:"product deletion successful"})
+    }catch(error){
+        res.status(500).json({success:false,message:`error while deletion with message: ${error.message}`})
     }
 })
 
