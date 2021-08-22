@@ -37,5 +37,5 @@ router.route("/:productId")
     res.json({message:"api under construction"})
 })
 
-
 module.exports = router
+
