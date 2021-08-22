@@ -1,16 +1,17 @@
 const express = require("express")
 const router = express.Router()
 const bodyParser = require("body-parser")
+const {extend} = require("lodash")
 
 router.use(bodyParser.json())
 
 // model import
 const {Product} = require("../models/product.model")
 
-//middleware
+// middleware
 const {findProduct} = require("../middleware/findProduct.middleware")
 
-
+// /product route
 router.route("/")
 .get(async(req,res) => {
     try{
@@ -32,9 +33,23 @@ router.route("/")
 
 router.param("productId",findProduct)
 
+// /product/:productId route
 router.route("/:productId")
 .get((req,res) => {
-    res.json({message:"api under construction"})
+    const {product} = req
+    product.__v=undefined
+    res.json({success:true,product})
+})
+.post(async(req,res) => {
+    try{
+        let {product} = req
+        const updateProduct = req.body
+        product = extend(product,updateProduct)
+        product = await product.save()
+        res.status(201).json({success:true,updatedProduct:product})
+    }catch(err){
+        res.status(500).json({success:false,message:`error with message: ${err.message}`})
+    }
 })
 
 module.exports = router

@@ -12,6 +12,7 @@ const products = require("./routes/products.route")
 // middleware
 const logRequest = require("./middleware/logRequest.middleware")
 const {routeNotFound} = require("./middleware/routeNotFound.middleware")
+const {errorHandler} = require("./middleware/errorHandler.middleware")
 
 
 // app.use(logRequest)
@@ -22,6 +23,12 @@ app.use("/products",products)
  *  404 Handler Do Not Move
  */
 app.use(routeNotFound)
+
+
+/**
+ *  Error Handler Do Not Move
+ */
+app.use(errorHandler)
 
 const PORT = 5000;
 app.listen(PORT, () => console.log("server started on PORT: ",PORT))
