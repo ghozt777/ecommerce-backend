@@ -16,8 +16,8 @@ const {errorHandler} = require("./middleware/errorHandler.middleware")
 
 
 // app.use(logRequest)
-app.use("/",home)
-app.use("/products",products)
+app.get("/",home)
+app.get("/products",products)
 
 /**
  *  404 Handler Do Not Move
