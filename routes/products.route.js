@@ -7,6 +7,8 @@ router.use(bodyParser.json())
 // model import
 const {Product} = require("../models/product.model")
 
+//middleware
+const {findProduct} = require("../middleware/findProduct.middleware")
 
 
 router.route("/")
@@ -26,6 +28,13 @@ router.route("/")
     }catch(err){
         res.status(500).json({success:false,errorMessage:err.message})
     }
+})
+
+router.param("productId",findProduct)
+
+router.route("/:productId")
+.get((req,res) => {
+    res.json({message:"api under construction"})
 })
 
 
