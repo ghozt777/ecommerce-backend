@@ -30,6 +30,6 @@ app.use(routeNotFound)
  */
 app.use(errorHandler)
 
-const PORT = 5000;
+let PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("server started on PORT: ",PORT))
 
